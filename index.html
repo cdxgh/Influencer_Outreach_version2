@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IndiaMART — Influencer Outreach Templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --teal:#0B3D68;             /* IndiaMART Blue */
+    --teal-dark:#062949;
+    --teal-pale:#E9F0F7;
+    --teal-pale-2:#D6E3EF;
+    --ink:#1A2226;
+    --ink-soft:#5B6670;
+    --ink-faint:#8B959C;
+    --line:#E4E9E9;
+    --white:#FFFFFF;
+    --amber:#D91E18; /* IndiaMART Red */
+    --amber-dark:#A11712;
+    --amber-pale:#FBE3E1;
+    --radius:10px;
+    --shell-pad:28px;
+  }
+  *{box-sizing:border-box;}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--white);
+    overflow:hidden;
+  }
+  ::selection{background:var(--teal-pale-2);}
+
+  h1,h2,h3,.display{
+    font-family:'Space Grotesk',system-ui,sans-serif;
+  }
+
+  button{font-family:inherit;}
+
+  /* ---------- App shell ---------- */
+  .app{
+    height:100vh;
+    display:grid;
+    grid-template-columns:296px 1fr;
+    grid-template-rows:100%;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .rail{
+    background:var(--ink);
+    color:var(--white);
+    display:flex;
+    flex-direction:column;
+    height:100%;
+    overflow-y:auto;
+  }
+  .rail::-webkit-scrollbar{width:6px;}
+  .rail::-webkit-scrollbar-thumb{background:#333c41;border-radius:6px;}
+
+  .brand{
+    padding:26px 24px 18px;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .brand-mark{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+  }
+  .brand-dot{
+    width:11px;height:11px;border-radius:3px;
+    background:var(--teal);
+    flex:none;
+  }
+  .brand-logo{
+    height:26px;
+    width:auto;
+    flex:none;
+    border-radius:3px;
+    background:var(--white);
+    padding:2px 4px;
+  }
+  .brand-name{
+    font-family:'Space Grotesk';
+    font-weight:700;
+    font-size:16px;
+    letter-spacing:.01em;
+    color:var(--white);
+  }
+  .brand-sub{
+    margin:8px 0 0;
+    font-size:12.5px;
+    color:#94A0A6;
+    line-height:1.5;
+  }
+
+  nav.tree{
+    padding:14px 12px 20px;
+    flex:1;
+  }
+
+  .nav-group{margin-bottom:2px;}
+
+  .nav-parent{
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:transparent;
+    border:none;
+    color:#D6DDE0;
+    padding:11px 12px;
+    border-radius:8px;
+    font-size:14px;
+    font-weight:600;
+    text-align:left;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-parent:hover{background:rgba(255,255,255,.06); color:var(--white);}
+  .nav-parent.is-active{background:rgba(15,139,141,.18); color:var(--white);}
+
+  .nav-index{
+    flex:none;
+    width:22px;height:22px;
+    border-radius:6px;
+    background:rgba(255,255,255,.08);
+    display:flex;align-items:center;justify-content:center;
+    font-size:11px;font-weight:700;
+    color:#AEB8BD;
+  }
+  .nav-parent.is-active .nav-index{background:var(--teal); color:var(--white);}
+
+  .nav-label{flex:1;}
+
+  .chev{
+    flex:none;
+    width:14px;height:14px;
+    color:#7C878D;
+    transition:transform .18s ease;
+  }
+  .nav-group.is-open .chev{transform:rotate(90deg); color:var(--white);}
+
+  .nav-children{
+    display:grid;
+    grid-template-rows:0fr;
+    transition:grid-template-rows .2s ease;
+  }
+  .nav-group.is-open .nav-children{grid-template-rows:1fr;}
+  .nav-children-inner{overflow:hidden;}
+
+  .nav-child{
+    width:calc(100% - 14px);
+    margin:2px 0 2px 40px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    background:transparent;
+    border:none;
+    color:#9BA6AC;
+    padding:8px 10px;
+    border-radius:7px;
+    font-size:13.2px;
+    font-weight:500;
+    text-align:left;
+    cursor:pointer;
+    transition:background .15s ease, color .15s ease;
+  }
+  .nav-child:hover{background:rgba(255,255,255,.05); color:var(--white);}
+  .nav-child.is-active{background:var(--teal); color:var(--white); font-weight:600;}
+  .nav-child .dot{width:5px;height:5px;border-radius:50%;background:#5C666C;flex:none;}
+  .nav-child.is-active .dot{background:var(--white);}
+
+  .rail-foot{
+    padding:16px 24px 22px;
+    border-top:1px solid rgba(255,255,255,.08);
+    font-size:11.5px;
+    color:#6E7A80;
+    line-height:1.6;
+  }
+
+  /* ---------- Main ---------- */
+  main{
+    height:100%;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+    background:#FBFDFD;
+  }
+
+  .topbar{
+    flex:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:16px;
+    padding:22px var(--shell-pad) 18px;
+    border-bottom:1px solid var(--line);
+    background:var(--white);
+  }
+  .crumb{
+    font-size:12.5px;
+    color:var(--ink-faint);
+    font-weight:600;
+    letter-spacing:.02em;
+  }
+  .crumb b{color:var(--teal-dark);}
+  .crumb .sep{margin:0 6px; color:#C7D0D0;}
+  .view-title{
+    margin:4px 0 0;
+    font-size:22px;
+    font-weight:700;
+    letter-spacing:-.01em;
+  }
+  .copy-btn{
+    flex:none;
+    display:flex;
+    align-items:center;
+    gap:7px;
+    background:var(--white);
+    border:1.5px solid var(--line);
+    color:var(--ink);
+    padding:9px 15px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:border-color .15s ease, background .15s ease, color .15s ease;
+  }
+  .copy-btn:hover{border-color:var(--teal); color:var(--teal-dark); background:var(--teal-pale);}
+  .copy-btn svg{width:15px;height:15px;}
+  .copy-btn.copied{border-color:var(--teal); background:var(--teal); color:var(--white);}
+
+  .stage{
+    flex:1;
+    overflow-y:auto;
+    padding:26px var(--shell-pad) 40px;
+  }
+  .stage::-webkit-scrollbar{width:8px;}
+  .stage::-webkit-scrollbar-thumb{background:#DDE5E5;border-radius:8px;}
+
+  .panel{display:none; max-width:760px;}
+  .panel.is-active{display:block; animation:rise .28s ease;}
+  @keyframes rise{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:translateY(0);}}
+
+  .purpose{
+    display:flex;
+    gap:8px;
+    font-size:13.5px;
+    color:var(--ink-soft);
+    line-height:1.6;
+    margin:0 0 20px;
+    padding:12px 14px;
+    background:var(--teal-pale);
+    border-left:3px solid var(--teal);
+    border-radius:0 6px 6px 0;
+  }
+  .purpose b{color:var(--teal-dark); flex:none; font-weight:700;}
+
+  .card{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(20,30,32,.03);
+  }
+  .card-head{
+    padding:16px 20px;
+    border-bottom:1px solid var(--line);
+    background:linear-gradient(180deg,#FCFEFE,#F6FAFA);
+  }
+  .card-head .row{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    font-size:13px;
+    color:var(--ink-faint);
+    font-weight:600;
+    margin-bottom:3px;
+  }
+  .card-head .row span.val{
+    color:var(--ink);
+    font-weight:500;
+  }
+  .tag{
+    display:inline-block;
+    font-size:10.5px;
+    font-weight:700;
+    letter-spacing:.03em;
+    color:var(--amber-dark);
+    background:var(--amber-pale);
+    padding:2px 7px;
+    border-radius:5px;
+    margin-left:6px;
+    vertical-align:middle;
+  }
+  .subject-line{
+    font-size:15.5px;
+    font-weight:700;
+    color:var(--ink);
+    margin-top:4px;
+  }
+
+  .card-body{
+    padding:22px 24px 26px;
+    font-size:14.5px;
+    line-height:1.75;
+    color:var(--ink);
+  }
+  .card-body p{margin:0 0 14px;}
+  .card-body p:last-child{margin-bottom:0;}
+  .sig{margin-top:2px;}
+  .sig p{margin:0; line-height:1.55;}
+
+  .bullets{
+    margin:0 0 16px;
+    padding:0;
+    list-style:none;
+  }
+  .bullets li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:8px;
+    line-height:1.6;
+  }
+  .bullets li::before{
+    content:'';
+    position:absolute;
+    left:2px; top:9px;
+    width:6px;height:6px;
+    border-radius:50%;
+    background:var(--teal);
+  }
+
+  blockquote{
+    margin:16px 0;
+    padding:14px 16px;
+    background:var(--teal-pale);
+    border-left:3px solid var(--teal);
+    border-radius:0 8px 8px 0;
+    font-size:13.8px;
+    line-height:1.7;
+    color:var(--teal-dark);
+    font-style:italic;
+  }
+  blockquote p{margin:0 0 10px;}
+  blockquote p:last-child{margin-bottom:0;}
+
+  .callout{
+    margin:16px 0;
+    padding:16px 18px;
+    background:#1A2226;
+    color:#E9EDEE;
+    border-radius:10px;
+    font-size:12.3px;
+    line-height:1.75;
+    font-weight:600;
+    letter-spacing:.01em;
+  }
+
+  .link-inline{color:var(--teal-dark); font-weight:700; text-decoration:underline; text-underline-offset:2px;}
+
+  .attach{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-top:14px;
+    padding:12px 16px;
+    background:var(--white);
+    border:1.5px dashed var(--teal);
+    border-radius:10px;
+  }
+  .attach svg{width:17px;height:17px;flex:none;color:var(--teal-dark);}
+  .attach a{
+    color:var(--teal-dark);
+    font-weight:700;
+    font-size:13.5px;
+    text-decoration:none;
+  }
+  .attach a:hover{text-decoration:underline;}
+  .attach span.attach-label{
+    color:var(--ink-faint);
+    font-size:11.5px;
+    font-weight:700;
+    letter-spacing:.03em;
+    margin-right:2px;
+  }
+
+  .divider-note{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:26px 0 16px;
+    color:var(--ink-faint);
+    font-size:12px;
+    font-weight:600;
+    letter-spacing:.02em;
+  }
+  .divider-note::before,.divider-note::after{content:'';flex:1;height:1px;background:var(--line);}
+
+  /* Table panels */
+  .table-wrap{
+    background:var(--white);
+    border:1px solid var(--line);
+    border-radius:14px;
+    overflow:hidden;
+    box-shadow:0 1px 2px rgba(20,30,32,.03);
+  }
+  table{width:100%; border-collapse:collapse; font-size:13.8px;}
+  thead th{
+    text-align:left;
+    background:var(--teal);
+    color:var(--white);
+    font-weight:700;
+    padding:12px 16px;
+    letter-spacing:.01em;
+  }
+  tbody td{
+    padding:13px 16px;
+    border-top:1px solid var(--line);
+    line-height:1.6;
+    vertical-align:top;
+  }
+  tbody tr:nth-child(even){background:#F6FAFA;}
+  tbody td.strong{font-weight:700; color:var(--ink); white-space:nowrap;}
+
+  .note-strip{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+    font-size:13px;
+    color:var(--ink-soft);
+    background:var(--amber-pale);
+    border-left:3px solid var(--amber);
+    padding:12px 14px;
+    border-radius:0 6px 6px 0;
+    margin:0 0 20px;
+    line-height:1.6;
+  }
+
+  /* ---------- Mobile drawer ---------- */
+  .menu-btn{
+    display:none;
+    align-items:center;
+    gap:8px;
+    background:var(--ink);
+    color:var(--white);
+    border:none;
+    padding:9px 14px;
+    border-radius:8px;
+    font-size:13px;
+    font-weight:700;
+    cursor:pointer;
+  }
+  .menu-btn svg{width:16px;height:16px;}
+  .scrim{
+    display:none;
+    position:fixed; inset:0;
+    background:rgba(10,14,15,.45);
+    z-index:40;
+  }
+
+  @media (max-width: 880px){
+    .app{grid-template-columns:1fr;}
+    .rail{
+      position:fixed;
+      inset:0 auto 0 0;
+      width:290px;
+      max-width:82vw;
+      transform:translateX(-100%);
+      transition:transform .22s ease;
+      z-index:50;
+      box-shadow:8px 0 24px rgba(0,0,0,.18);
+    }
+    .rail.is-open{transform:translateX(0);}
+    .scrim.is-open{display:block;}
+    .menu-btn{display:inline-flex;}
+    :root{--shell-pad:18px;}
+    .topbar{padding:16px var(--shell-pad) 14px; flex-wrap:wrap;}
+    .view-title{font-size:19px;}
+    .stage{padding:18px var(--shell-pad) 32px;}
+    .card-body{padding:18px 16px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="rail" id="rail">
+    <div class="brand">
+      <div class="brand-mark">
+        <img class="brand-logo" src="https://m.imimg.com/gifs/iml300.png" alt="IndiaMART logo" onerror="this.style.display='none'; document.querySelector('.brand-dot').style.display='inline-flex';">
+        <span class="brand-dot" style="display:none;"></span>
+        <span class="brand-name">IndiaMART</span>
+      </div>
+      <p class="brand-sub">Influencer Outreach<br>Message &amp; email templates</p>
+    </div>
+
+    <nav class="tree" id="tree">
+
+      <div class="nav-group" data-group="outreach">
+        <button class="nav-parent" data-target-panel="outreach-email" data-crumb="New Outreach · Email" data-title="New Outreach Email">
+          <span class="nav-index">1</span>
+          <span class="nav-label">New Outreach</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-children"><div class="nav-children-inner">
+          <button class="nav-child" data-panel="outreach-email" data-crumb="New Outreach · Email" data-title="New Outreach Email"><span class="dot"></span>Email</button>
+          <button class="nav-child" data-panel="outreach-chat" data-crumb="New Outreach · WhatsApp / Social DM" data-title="New Outreach WhatsApp / Social DM"><span class="dot"></span>WhatsApp / Social DM</button>
+        </div></div>
+      </div>
+
+      <div class="nav-group" data-group="followup">
+        <button class="nav-parent" data-target-panel="followup-email" data-crumb="Follow-up · Email" data-title="Follow-up Email">
+          <span class="nav-index">2</span>
+          <span class="nav-label">Follow-up</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-children"><div class="nav-children-inner">
+          <button class="nav-child" data-panel="followup-email" data-crumb="Follow-up · Email (Day 7)" data-title="Follow-up Email (Day 7)"><span class="dot"></span>Email (Day 7)</button>
+          <button class="nav-child" data-panel="followup-chat" data-crumb="Follow-up · WhatsApp / Social DM (Day 3)" data-title="Follow-up WhatsApp / Social DM (Day 3)"><span class="dot"></span>WhatsApp / Social DM (Day 3)</button>
+        </div></div>
+      </div>
+
+      <div class="nav-group" data-group="confirmation">
+        <button class="nav-parent" data-panel="confirmation" data-crumb="Confirmation &amp; Agreement" data-title="Final Confirmation &amp; Agreement Email">
+          <span class="nav-index">3</span>
+          <span class="nav-label">Confirmation &amp; Agreement</span>
+        </button>
+      </div>
+
+      <div class="nav-group" data-group="invoice">
+        <button class="nav-parent" data-panel="invoice" data-crumb="Invoice" data-title="Invoice Request Email">
+          <span class="nav-index">4</span>
+          <span class="nav-label">Invoice</span>
+        </button>
+      </div>
+
+      <div class="nav-group" data-group="appendix">
+        <button class="nav-parent" data-target-panel="appendix-cadence" data-crumb="Appendix · Follow-up Cadence" data-title="Follow-up Cadence">
+          <span class="nav-index">5</span>
+          <span class="nav-label">Appendix</span>
+          <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="nav-children"><div class="nav-children-inner">
+          <button class="nav-child" data-panel="appendix-cadence" data-crumb="Appendix · Follow-up Cadence" data-title="Follow-up Cadence"><span class="dot"></span>Follow-up Cadence</button>
+          <button class="nav-child" data-panel="appendix-decision" data-crumb="Appendix · Decision Point" data-title="Decision Point"><span class="dot"></span>Decision Point</button>
+        </div></div>
+      </div>
+
+    </nav>
+
+    <div class="rail-foot">End-to-end set: First Outreach → Follow-up → Confirmation &amp; Agreement → Invoice</div>
+  </aside>
+
+  <!-- MAIN -->
+  <main>
+    <div class="topbar">
+      <div>
+        <button class="menu-btn" id="menuBtn">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg>
+          Menu
+        </button>
+        <div class="crumb" id="crumb" style="margin-top:8px;">New Outreach <span class="sep">/</span> <b>Email</b></div>
+        <h1 class="view-title" id="viewTitle">New Outreach Email</h1>
+      </div>
+      <button class="copy-btn" id="copyBtn">
+        <svg viewBox="0 0 24 24" fill="none"><rect x="8" y="8" width="12" height="12" rx="2" stroke="currentColor" stroke-width="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11" stroke="currentColor" stroke-width="2"/></svg>
+        <span id="copyLabel">Copy message</span>
+      </button>
+    </div>
+
+    <div class="stage" id="stage">
+
+      <!-- 1a New Outreach Email -->
+      <section class="panel is-active" id="panel-outreach-email">
+        <p class="purpose"><b>Purpose</b> First-touch message introducing the collaboration opportunity.</p>
+        <div class="card copy-source">
+          <div class="card-head">
+            <div class="row">Subject<span class="tag">EMAIL</span></div>
+            <div class="subject-line">Collaboration Opportunity with IndiaMART</div>
+          </div>
+          <div class="card-body">
+            <p>Hi [Creator Name],</p>
+            <p>I'm [Your Name], handling influencer collaboration at IndiaMART.</p>
+            <p>We came across your video on [platform name (IG/YT/FB)] for the Product "[Product Title]" and were impressed by it. We'd like to explore a collaboration opportunity with you around this content.</p>
+            <p>Please share your contact details so that we can discuss this further, or you can also reach me directly at [SPOC contact number].</p>
+            <p>Looking forward to hearing from you.</p>
+            <div class="sig"><p>Thanks,</p><p>[Your Name]</p><p>IndiaMART Team</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1b New Outreach WhatsApp -->
+      <section class="panel" id="panel-outreach-chat">
+        <p class="purpose"><b>Purpose</b> Same first-touch, shorter and quick-reply friendly for chat platforms.</p>
+        <div class="card copy-source">
+          <div class="card-head">
+            <div class="row">Channel<span class="val" style="margin-left:6px;">WhatsApp / Instagram / Social DM</span><span class="tag">CHAT</span></div>
+          </div>
+          <div class="card-body">
+            <p>Hi Creator,</p>
+            <p>I'm [Your Name] from IndiaMART. We saw your video on "[Video/Product Title]" and loved it.</p>
+            <p>We'd like to explore a collaboration with you. Please reply here or give us a call whenever you're free.</p>
+            <div class="sig"><p>Thanks,</p><p>IndiaMART Team</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2a Follow-up Email -->
+      <section class="panel" id="panel-followup-email">
+        <p class="purpose"><b>Purpose</b> Sent if no response after the initial email — see the Appendix cadence for timing.</p>
+        <div class="card copy-source">
+          <div class="card-head">
+            <div class="row">Subject<span class="tag">EMAIL · DAY 7</span></div>
+            <div class="subject-line">Following up — Collaboration Opportunity with IndiaMART</div>
+          </div>
+          <div class="card-body">
+            <p>Hi [Creator Name],</p>
+            <p>Just following up on my earlier note about a collaboration opportunity with IndiaMART around your content on "[Video/Product Title]".</p>
+            <p>Would love to connect and share the details — let me know a time that works, or feel free to reply directly here.</p>
+            <div class="sig"><p>Thanks,</p><p>[Your Name]</p><p>IndiaMART Team</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2b Follow-up WhatsApp -->
+      <section class="panel" id="panel-followup-chat">
+        <p class="purpose"><b>Purpose</b> Short nudge on chat channels, following the same cadence.</p>
+        <div class="card copy-source">
+          <div class="card-head">
+            <div class="row">Channel<span class="val" style="margin-left:6px;">WhatsApp / Social DM</span><span class="tag">CHAT · DAY 3</span></div>
+          </div>
+          <div class="card-body">
+            <p>Hi [Creator Name], just checking in on my earlier message about a collaboration with IndiaMART. Would love to connect whenever you get a chance 🙏</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 Confirmation & Agreement -->
+      <section class="panel" id="panel-confirmation">
+        <p class="purpose"><b>Purpose</b> Sent once the creator confirms interest — combines the positive-reply note, final price/usage-rights confirmation, and the Agreement for review and email-based acceptance into a single email.</p>
+        <div class="card copy-source">
+          <div class="card-head">
+            <div class="row">Subject<span class="tag">EMAIL</span></div>
+            <div class="subject-line">Confirming Our Collaboration &amp; Agreement — [Video/Product Title]</div>
+          </div>
+          <div class="card-body">
+            <p>Hi [Creator Name],</p>
+            <p>We are excited to move forward with you!</p>
+            <p>As agreed, here are the final details of our collaboration:</p>
+            <ul class="bullets">
+              <li>Content: "[Video/Product Title]"</li>
+              <li>Usage Rights: Full Content Usage Rights (for IndiaMART's advertising usage)</li>
+              <li>Final Amount: INR [X]</li>
+            </ul>
+            <p>We have downloaded your content from your social account for our use. If you have the raw/unedited file available, please share it directly via this email as it helps us prepare the best possible creative.</p>
+            <p>Please find the Agreement for Services (Influencer Services and Content Licence Agreement) attached to this email for your review.</p>
+            <p>To confirm and execute the agreement, simply reply to this exact email from your registered email ID using the text format provided below. No physical or electronic signature is required.</p>
+            <blockquote>
+              <p>I, ____________________ (Influencer Name), hereby confirm that I have carefully reviewed and understood the Agreement for Services, together with all its Annexures, shared by IndiaMART InterMESH Limited, and hereby approve, accept and agree to be bound by the Agreement in its entirety and without modification.</p>
+              <p>I expressly confirm that this email constitutes my valid and binding acceptance and execution of the Agreement, and that this email approval shall have the same legal force and effect as if I had signed the Agreement by hand or through an electronic signature.</p>
+              <p>I further agree that no separate physical or electronic signature is required for the Agreement to be valid and binding upon me.</p>
+            </blockquote>
+            <p>We look forward to your confirmation reply so we can proceed smoothly!</p>
+            <div class="sig"><p>Thanks,</p><p>IndiaMART Team</p></div>
+          </div>
+        </div>
+        <div class="attach">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21.44 11.05l-9.19 9.19a5 5 0 0 1-7.07-7.07l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="attach-label">ATTACHMENT</span>
+          <a href="https://docs.google.com/document/d/17oy7XE3XTrBIm8iKnYm-mM0WxXbad8zp/edit?tab=t.0" target="_blank" rel="noopener">Agreement for Services (Influencer Services and Content Licence Agreement)</a>
+        </div>
+      </section>
+
+      <!-- 4 Invoice -->
+      <section class="panel" id="panel-invoice">
+        <p class="purpose"><b>Purpose</b> Sent after agreement is confirmed, asking the creator to raise their invoice in the required format.</p>
+        <div class="card copy-source">
+          <div class="card-head">
+            <div class="row">Subject<span class="tag">EMAIL</span></div>
+            <div class="subject-line">Next Step — Please Raise Your Invoice</div>
+          </div>
+          <div class="card-body">
+            <p>Hi [Creator Name],</p>
+            <p>Thank you for confirming the agreement. To proceed with payment, please raise your invoice and share it with us on this email.</p>
+            <p>I have attached a reference invoice format for your reference.</p>
+            <div class="sig"><p>Thanks,</p><p>IndiaMART Team</p></div>
+          </div>
+        </div>
+        <div class="attach">
+          <svg viewBox="0 0 24 24" fill="none"><path d="M21.44 11.05l-9.19 9.19a5 5 0 0 1-7.07-7.07l9.19-9.19a3.5 3.5 0 0 1 4.95 4.95l-9.2 9.19a1.5 1.5 0 0 1-2.12-2.12l8.49-8.48" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span class="attach-label">ATTACHMENT</span>
+          <a href="https://docs.google.com/document/d/133NX7J-WZlHeogSlKbubHMamFgCxvFlL/edit?tab=t.0" target="_blank" rel="noopener">Reference Invoice Format</a>
+        </div>
+      </section>
+
+      <!-- 5a Appendix – Cadence -->
+      <section class="panel" id="panel-appendix-cadence">
+        <p class="purpose"><b>Purpose</b> Fixed schedule for chasing non-responders so outreach stays consistent.</p>
+        <p class="note-strip">Reference logic only — not part of any email or message. Use this to decide timing and next action; it should never be pasted into an email trail.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th style="width:18%;">Day</th><th style="width:30%;">Channel</th><th>Action / Message Type</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">Day 0</td><td>Email + WhatsApp/DM</td><td>Initial outreach message sent</td></tr>
+              <tr><td class="strong">Day 3</td><td>WhatsApp/DM</td><td>Friendly nudge — short reminder, easy to reply</td></tr>
+              <tr><td class="strong">Day 7</td><td>Email</td><td>Follow-up email — restate opportunity briefly</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5b Appendix – Decision Point -->
+      <section class="panel" id="panel-appendix-decision">
+        <p class="purpose"><b>Purpose</b> What to send next, depending on whether the creator has responded.</p>
+        <p class="note-strip">Reference logic only — not part of any email or message. Use this to decide timing and next action; it should never be pasted into an email trail.</p>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th style="width:28%;">Creator Reply</th><th>Next Action</th></tr></thead>
+            <tbody>
+              <tr><td class="strong">No response</td><td>Continue the Follow-up Cadence above (Day 3 → Day 7). Still no response after Day 7 → mark 'Cold' in the tracker.</td></tr>
+              <tr><td class="strong">Reply received (any stage)</td><td>Move to a call to discuss the collaboration, then send the Final Confirmation &amp; Agreement Email once terms are agreed.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<script>
+(function(){
+  const groups = document.querySelectorAll('.nav-group');
+  const parents = document.querySelectorAll('.nav-parent');
+  const children = document.querySelectorAll('.nav-child');
+  const panels = document.querySelectorAll('.panel');
+  const crumbEl = document.getElementById('crumb');
+  const titleEl = document.getElementById('viewTitle');
+  const stage = document.getElementById('stage');
+  const rail = document.getElementById('rail');
+  const scrim = document.getElementById('scrim');
+  const menuBtn = document.getElementById('menuBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const copyLabel = document.getElementById('copyLabel');
+
+  function setCrumb(text, title){
+    const parts = text.split(' · ');
+    if(parts.length === 2){
+      crumbEl.innerHTML = parts[0] + ' <span class="sep">/</span> <b>' + parts[1] + '</b>';
+    } else {
+      crumbEl.innerHTML = '<b>' + parts[0] + '</b>';
+    }
+    titleEl.textContent = title;
+  }
+
+  function activateGroup(group){
+    groups.forEach(g => g.classList.toggle('is-open', g === group));
+  }
+
+  function activatePanel(id){
+    panels.forEach(p => p.classList.toggle('is-active', p.id === 'panel-' + id));
+    parents.forEach(p => p.classList.toggle('is-active', p.dataset.panel === id));
+    children.forEach(c => c.classList.toggle('is-active', c.dataset.panel === id));
+    stage.scrollTop = 0;
+    resetCopyState();
+  }
+
+  function resetCopyState(){
+    copyBtn.classList.remove('copied');
+    copyLabel.textContent = 'Copy message';
+  }
+
+  parents.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const group = btn.closest('.nav-group');
+      const childrenWrap = group.querySelector('.nav-children');
+
+      activateGroup(childrenWrap ? group : null);
+
+      const panelId = btn.dataset.panel || btn.dataset.targetPanel;
+      if(panelId){
+        activatePanel(panelId);
+        setCrumb(btn.dataset.crumb, btn.dataset.title);
+      }
+      closeMobileRail();
+    });
+  });
+
+  children.forEach(btn => {
+    btn.addEventListener('click', () => {
+      activatePanel(btn.dataset.panel);
+      setCrumb(btn.dataset.crumb, btn.dataset.title);
+      closeMobileRail();
+    });
+  });
+
+  // Initial state
+  activateGroup(document.querySelector('.nav-group[data-group="outreach"]'));
+  activatePanel('outreach-email');
+
+  // Copy to clipboard
+  copyBtn.addEventListener('click', () => {
+    const active = document.querySelector('.panel.is-active .copy-source');
+    if(!active) return;
+    const text = active.innerText.replace(/\n{3,}/g,'\n\n').trim();
+    navigator.clipboard.writeText(text).then(() => {
+      copyBtn.classList.add('copied');
+      copyLabel.textContent = 'Copied';
+      setTimeout(resetCopyState, 1600);
+    });
+  });
+
+  // Mobile drawer
+  function openMobileRail(){ rail.classList.add('is-open'); scrim.classList.add('is-open'); }
+  function closeMobileRail(){ rail.classList.remove('is-open'); scrim.classList.remove('is-open'); }
+  menuBtn.addEventListener('click', openMobileRail);
+  scrim.addEventListener('click', closeMobileRail);
+})();
+</script>
+</body>
+</html>
