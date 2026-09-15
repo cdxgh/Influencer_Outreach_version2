@@ -529,23 +529,30 @@
         </div></div>
       </div>
 
+      <div class="nav-group" data-group="confirmation-pan">
+        <button class="nav-parent" data-panel="confirmation-pan" data-crumb="Confirmation · PAN Card Variant" data-title="Final Confirmation Email (PAN Card Request Variant)">
+          <span class="nav-index">3</span>
+          <span class="nav-label">Confirmation (PAN Variant)</span>
+        </button>
+      </div>
+
       <div class="nav-group" data-group="confirmation">
         <button class="nav-parent" data-panel="confirmation" data-crumb="Confirmation &amp; Agreement" data-title="Final Confirmation &amp; Agreement Email">
-          <span class="nav-index">3</span>
+          <span class="nav-index">4</span>
           <span class="nav-label">Confirmation &amp; Agreement</span>
         </button>
       </div>
 
       <div class="nav-group" data-group="invoice">
         <button class="nav-parent" data-panel="invoice" data-crumb="Invoice" data-title="Invoice Request Email">
-          <span class="nav-index">4</span>
+          <span class="nav-index">5</span>
           <span class="nav-label">Invoice</span>
         </button>
       </div>
 
       <div class="nav-group" data-group="appendix">
         <button class="nav-parent" data-target-panel="appendix-cadence" data-crumb="Appendix · Follow-up Cadence" data-title="Follow-up Cadence">
-          <span class="nav-index">5</span>
+          <span class="nav-index">6</span>
           <span class="nav-label">Appendix</span>
           <svg class="chev" viewBox="0 0 24 24" fill="none"><path d="M9 6l6 6-6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </button>
@@ -645,7 +652,30 @@
         </div>
       </section>
 
-      <!-- 3 Confirmation & Agreement -->
+      <!-- 3 Confirmation (PAN Card Request Variant) -->
+      <section class="panel" id="panel-confirmation-pan">
+        <p class="purpose"><b>Purpose</b> Sent once the creator confirms interest, in cases where the formal agreement will be shared separately — confirms final terms and requests PAN details before the agreement is sent for execution.</p>
+        <div class="card copy-source">
+          <div class="card-head">
+            <div class="row">Subject<span class="tag">EMAIL</span></div>
+            <div class="subject-line">Confirming Our Collaboration — [Video/Product Title]</div>
+          </div>
+          <div class="card-body">
+            <p>Hi [Creator Name],</p>
+            <p>Thank you for the discussion. As agreed, here are the final details of our collaboration:</p>
+            <ul class="bullets">
+              <li>Content: [Content Link/Title]</li>
+              <li>Usage Rights: Full Content Usage Rights</li>
+              <li>Final Amount: INR [X]</li>
+            </ul>
+            <p>We have downloaded your content from your social account for our use. If you have the raw/unedited file available, please share it directly on this same email — it helps us prepare the best possible creative.</p>
+            <p>To proceed with the formal agreement, please share your PAN card details with us. Once received, we will share the formal agreement separately for your confirmation.</p>
+            <div class="sig"><p>Thanks &amp; Regards,</p><p>IndiaMART Team</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 Confirmation & Agreement -->
       <section class="panel" id="panel-confirmation">
         <p class="purpose"><b>Purpose</b> Sent once the creator confirms interest — combines the positive-reply note, final price/usage-rights confirmation, and the Agreement for review and email-based acceptance into a single email.</p>
         <div class="card copy-source">
@@ -681,7 +711,7 @@
         </div>
       </section>
 
-      <!-- 4 Invoice -->
+      <!-- 5 Invoice -->
       <section class="panel" id="panel-invoice">
         <p class="purpose"><b>Purpose</b> Sent after agreement is confirmed, asking the creator to raise their invoice in the required format.</p>
         <div class="card copy-source">
@@ -703,7 +733,7 @@
         </div>
       </section>
 
-      <!-- 5a Appendix – Cadence -->
+      <!-- 6a Appendix – Cadence -->
       <section class="panel" id="panel-appendix-cadence">
         <p class="purpose"><b>Purpose</b> Fixed schedule for chasing non-responders so outreach stays consistent.</p>
         <p class="note-strip">Reference logic only — not part of any email or message. Use this to decide timing and next action; it should never be pasted into an email trail.</p>
@@ -719,7 +749,7 @@
         </div>
       </section>
 
-      <!-- 5b Appendix – Decision Point -->
+      <!-- 6b Appendix – Decision Point -->
       <section class="panel" id="panel-appendix-decision">
         <p class="purpose"><b>Purpose</b> What to send next, depending on whether the creator has responded.</p>
         <p class="note-strip">Reference logic only — not part of any email or message. Use this to decide timing and next action; it should never be pasted into an email trail.</p>
